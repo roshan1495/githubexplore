@@ -21,16 +21,24 @@ jobs:
         env:
           hru: mygoditssuperb
           
+      - run: mkdir -p path/to/artifact
+
+      - run: echo hello > path/to/artifact/roshan.txt
+
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: .
+          path: path/to/artifact/roshan.txt
           
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v3.0.0
+
+      - uses: actions/download-artifact@v3
         with:
-          name: my-artifact 
-          path: .
+          name: my-artifact
+          path: path/to/artifact
+    
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: path/to/artifact/roshan.txt
           
           
     
